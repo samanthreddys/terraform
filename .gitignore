@@ -1,0 +1,9 @@
+terraform.tfvars
+terraform.tfstate
+terraform.tfstate.backup
+terraformuser.csv
+mykey*
+out.*
+.terraform*
+.terraform/plugins/darwin_amd64/terraform-provider-aws_v2.67.0_x4
+terraform.code-workspace
