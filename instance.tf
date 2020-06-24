@@ -5,6 +5,11 @@ resource "aws_key_pair" "mykey" {
 resource "aws_instance" "TerraformEC2Instance1" {
    ami = "${lookup(var.AMIS,var.AWS_REGION)}"
     instance_type = "t2.micro"
+
+    provisioner "local-exec" {
+        command = "echo ${aws_instance.TerraformEC2Instance1.private_ip} >> privateips.txt"
+    }
+
     key_name = "${aws_key_pair.mykey.key_name}"
 
     provisioner "file" {
@@ -29,4 +34,8 @@ resource "aws_instance" "TerraformEC2Instance1" {
         private_key = "${file("${var.PATH_TO_PRIVATE_KEY}")}"
     }
   
+}
+
+output "ip" {
+    value = "${aws_instance.TerraformEC2Instance1.public_ip}"
 }
